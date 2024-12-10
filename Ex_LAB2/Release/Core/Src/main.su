@@ -1,0 +1,5 @@
+../Core/Src/main.c:60:6:display7SEG	0	static
+../Core/Src/main.c:114:6:SystemClock_Config	72	static,ignoring_inline_asm
+../Core/Src/main.c:69:5:main	40	static,ignoring_inline_asm
+../Core/Src/main.c:236:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/main.c:267:6:Error_Handler	0	static,ignoring_inline_asm
