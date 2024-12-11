@@ -101,6 +101,12 @@ void update7SEG(int index){
 		break;
 	}
 }
+void updateClockBuffer(int hours, int minutes){
+	led_buffer[0] = hours / 10;
+	led_buffer[1] = hours % 10;
+	led_buffer[2] = minutes / 10;
+	led_buffer[3] = minutes % 10;
+}
 /* USER CODE END 0 */
 
 /**
@@ -139,8 +145,23 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int hours = 15, minutes = 8, seconds = 50;
   while (1)
   {
+	  seconds++;
+	  if(seconds >= 60){
+		  seconds = 0;
+		  minutes++;
+	  }
+	  if(minutes >= 60){
+		  minutes = 0;
+		  hours++;
+	  }
+	  if(hours >= 24){
+		  hours = 0;
+	  }
+	  updateClockBuffer(hours, minutes);
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
