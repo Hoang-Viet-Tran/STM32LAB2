@@ -107,6 +107,157 @@ void updateClockBuffer(int hours, int minutes){
 	led_buffer[2] = minutes / 10;
 	led_buffer[3] = minutes % 10;
 }
+const int MAX_LED_MATRIX = 8;
+int index_led_matrix = 0;
+uint8_t matrix_buffer[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
+void displayLedMatrix(uint8_t value){
+	if(value & (1U << 0))
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, RESET);
+	else
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, SET);
+	if(value & (1U << 1))
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, RESET);
+	else
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, SET);
+	if(value & (1U << 2))
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, RESET);
+	else
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, SET);
+	if(value & (1U << 3))
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, RESET);
+	else
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_11, SET);
+	if(value & (1U << 4))
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+	else
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET);
+	if(value & (1U << 5))
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
+	else
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET);
+	if(value & (1U << 6))
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, RESET);
+	else
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, SET);
+	if(value & (1U << 7))
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, RESET);
+	else
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, SET);
+}
+void updateLEDMatrix(int index){
+	switch(index){
+	case 0:{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
+		displayLedMatrix(matrix_buffer[index]);
+		break;
+	}
+	case 1:{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
+		displayLedMatrix(matrix_buffer[index]);
+		break;
+	}
+	case 2:{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
+		displayLedMatrix(matrix_buffer[index]);
+		break;
+	}
+	case 3:{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
+		displayLedMatrix(matrix_buffer[index]);
+		break;
+	}
+	case 4:{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
+		displayLedMatrix(matrix_buffer[index]);
+		break;
+	}
+	case 5:{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
+		displayLedMatrix(matrix_buffer[index]);
+		break;
+	}
+	case 6:{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, RESET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, SET);
+		displayLedMatrix(matrix_buffer[index]);
+		break;
+	}
+	case 7:{
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, SET);
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, RESET);
+		displayLedMatrix(matrix_buffer[index]);
+		break;
+	}
+	default:
+		break;
+	}
+}
+void shiftMatrix()
+{
+	uint8_t temp = matrix_buffer[0];
+	matrix_buffer[0] = matrix_buffer[1];
+	matrix_buffer[1] = matrix_buffer[2];
+	matrix_buffer[2] = matrix_buffer[3];
+	matrix_buffer[3] = matrix_buffer[4];
+	matrix_buffer[4] = matrix_buffer[5];
+	matrix_buffer[5] = matrix_buffer[6];
+	matrix_buffer[6] = matrix_buffer[7];
+	matrix_buffer[7] = temp;
+}
 int timer0_counter[2] = {};
 int timer0_flag[2] = {};
 int TIMER_CYCLE = 10;
@@ -160,35 +311,24 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer0(1000, 0);
-  setTimer0(250, 1);
-  int hours = 15, minutes = 8, seconds = 50;
+  setTimer0(10, 0);
+  setTimer0(100, 1);
   while (1)
   {
 	  if(timer0_flag[0] == 1){
-		  seconds++;
-		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
-		  setTimer0(1000, 0);
+		  shiftMatrix();
+		  setTimer0(10, 0);
 	  }
 	  if(timer0_flag[1] == 1){
 		  if(index_led > 3){
 			  index_led = 0;
 		  }
-		  update7SEG(index_led++);
-		  setTimer0(250, 1);
+		  if(index_led_matrix > 8){
+			  index_led_matrix = 0;
+		  }
+		  updateLEDMatrix(index_led_matrix++);
+		  setTimer0(100, 1);
 	  }
-	  if(seconds >= 60){
-		  seconds = 0;
-		  minutes++;
-	  }
-	  if(minutes >= 60){
-		  minutes = 0;
-		  hours++;
-	  }
-	  if(hours >= 24){
-		  hours = 0;
-	  }
-	  updateClockBuffer(hours, minutes);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -293,26 +433,38 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, DOT_Pin|LED_RED_Pin|EN0_Pin|EN1_Pin
-                          |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, ENM0_Pin|ENM1_Pin|DOT_Pin|LED_RED_Pin
+                          |EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
+                          |ENM2_Pin|ENM3_Pin|ENM4_Pin|ENM5_Pin
+                          |ENM6_Pin|ENM7_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
-                          |SEG4_Pin|SEG5_Pin|SEG6_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|ROW2_Pin
+                          |ROW3_Pin|ROW4_Pin|ROW5_Pin|ROW6_Pin
+                          |ROW7_Pin|SEG3_Pin|SEG4_Pin|SEG5_Pin
+                          |SEG6_Pin|ROW0_Pin|ROW1_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : DOT_Pin LED_RED_Pin EN0_Pin EN1_Pin
-                           EN2_Pin EN3_Pin */
-  GPIO_InitStruct.Pin = DOT_Pin|LED_RED_Pin|EN0_Pin|EN1_Pin
-                          |EN2_Pin|EN3_Pin;
+  /*Configure GPIO pins : ENM0_Pin ENM1_Pin DOT_Pin LED_RED_Pin
+                           EN0_Pin EN1_Pin EN2_Pin EN3_Pin
+                           ENM2_Pin ENM3_Pin ENM4_Pin ENM5_Pin
+                           ENM6_Pin ENM7_Pin */
+  GPIO_InitStruct.Pin = ENM0_Pin|ENM1_Pin|DOT_Pin|LED_RED_Pin
+                          |EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
+                          |ENM2_Pin|ENM3_Pin|ENM4_Pin|ENM5_Pin
+                          |ENM6_Pin|ENM7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SEG0_Pin SEG1_Pin SEG2_Pin SEG3_Pin
-                           SEG4_Pin SEG5_Pin SEG6_Pin */
-  GPIO_InitStruct.Pin = SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
-                          |SEG4_Pin|SEG5_Pin|SEG6_Pin;
+  /*Configure GPIO pins : SEG0_Pin SEG1_Pin SEG2_Pin ROW2_Pin
+                           ROW3_Pin ROW4_Pin ROW5_Pin ROW6_Pin
+                           ROW7_Pin SEG3_Pin SEG4_Pin SEG5_Pin
+                           SEG6_Pin ROW0_Pin ROW1_Pin */
+  GPIO_InitStruct.Pin = SEG0_Pin|SEG1_Pin|SEG2_Pin|ROW2_Pin
+                          |ROW3_Pin|ROW4_Pin|ROW5_Pin|ROW6_Pin
+                          |ROW7_Pin|SEG3_Pin|SEG4_Pin|SEG5_Pin
+                          |SEG6_Pin|ROW0_Pin|ROW1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
