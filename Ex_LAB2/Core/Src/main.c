@@ -204,14 +204,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|EN0_Pin|EN1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, DOT_Pin|LED_RED_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
                           |SEG4_Pin|SEG5_Pin|SEG6_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_RED_Pin EN0_Pin EN1_Pin */
-  GPIO_InitStruct.Pin = LED_RED_Pin|EN0_Pin|EN1_Pin;
+  /*Configure GPIO pins : DOT_Pin LED_RED_Pin EN0_Pin EN1_Pin
+                           EN2_Pin EN3_Pin */
+  GPIO_InitStruct.Pin = DOT_Pin|LED_RED_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -238,17 +241,41 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim){
 	if(counter <=0){
 		switch(status){
 		case 1:{
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, SET);
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, RESET);
 			display7SEG(1);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, RESET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
 			status = 2;
 			counter = 50;
 			break;
 		}
 		case 2:{
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, RESET);
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, SET);
 			display7SEG(2);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, RESET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, SET);
+			status = 3;
+			counter = 50;
+			break;
+		}
+		case 3:{
+			display7SEG(3);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, RESET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, SET);
+			status = 4;
+			counter = 50;
+			break;
+		}
+		case 4:{
+			display7SEG(0);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, SET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, RESET);
 			status = 1;
 			counter = 50;
 			break;
