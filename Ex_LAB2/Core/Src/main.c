@@ -164,7 +164,7 @@ int main(void)
   {
 	  if(timer0_flag == 1){
 		  seconds++;
-		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
 		  setTimer0(1000);
 	  }
 	  if(seconds >= 60){
